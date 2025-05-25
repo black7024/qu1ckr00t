@@ -61,7 +61,7 @@
     </ScrollView>
 
     <Button style="@style/Widget.AppCompat.Button.Colored"
-        android:text="Root"
+        android:text="获取 Root 权限"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
