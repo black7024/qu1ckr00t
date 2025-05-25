@@ -1,3 +1,5 @@
+
+增加中文汉化ui以及poc二进制文件
 # qu1ckr00t
 A PoC application demonstrating the power of an Android kernel arbitrary R/W (CVE-2019-2215). Writeup: https://hernan.de/blog/2019/10/15/tailoring-cve-2019-2215-to-achieve-root/
 
