@@ -46,10 +46,10 @@ public class MainActivity extends Activity {
         scrollView = (ScrollView)findViewById(R.id.scrollView2);
 
         SpannableStringBuilder ssb = new SpannableStringBuilder();
-        addLabel(ssb, "Device", String.format("%s (Android %s)", DeviceInfo.getDeviceName(), DeviceInfo.getAndroidVersion()));
-        addLabel(ssb, "Kernel", String.format("%s (%s)", DeviceInfo.getKernelVersion(), DeviceInfo.getDeviceArchitecture()));
-        addLabel(ssb, "Patch", DeviceInfo.getAndroidPatchLevel());
-        addLabel(ssb, "Fingerprint", DeviceInfo.getBuildFingerprint());
+        addLabel(ssb, "设备", String.format("%s (Android %s)", DeviceInfo.getDeviceName(), DeviceInfo.getAndroidVersion()));
+        addLabel(ssb, "内核", String.format("%s (%s)", DeviceInfo.getKernelVersion(), DeviceInfo.getDeviceArchitecture()));
+        addLabel(ssb, "补丁", DeviceInfo.getAndroidPatchLevel());
+        addLabel(ssb, "指纹", DeviceInfo.getBuildFingerprint());
 
         deviceInfo.setText(ssb);
 
@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
 
         rootButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rootButton.setText("Rooting...");
-                addStatus("Starting root process");
+                rootButton.setText("正在获取 Root 权限...");
+                addStatus("开始 Root 进程");
                 rootButton.setClickable(false);
                 rootButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                 new POCTask().execute();
@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
             try {
                 String [] args = {pocPath, "shell_exec", magiskInstPath + " " + magiskPath};
                 if(!executeNativeCode(args)) {
-                    publishProgress("Rooting native execution failed");
+                    publishProgress("获取 Root 权限时本地执行失败");
                     return false;
                 }
 
@@ -116,14 +116,14 @@ public class MainActivity extends Activity {
             File pocDir = getApplicationContext().getFilesDir();
             File pocFile = new File(pocDir, "do_root");
             pocPath = pocFile.getPath();
-            publishProgress("Extracting native code from APK...");
+            publishProgress("从 APK 中提取原生代码...");
             copyFile(poc, pocFile.getPath());
             pocFile.setExecutable(true);
         }
 
         private void extractMagisk()
         {
-            publishProgress("Extracting Magisk...");
+            publishProgress("提取 Magiskinit64...");
 
             InputStream magisk = getResources().openRawResource(R.raw.magiskinit64);
             File fileDir = getApplicationContext().getFilesDir();
@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
             copyFile(magisk, magiskPath);
             magiskFile.setExecutable(true);
 
-            publishProgress("Extracting installer...");
+            publishProgress("提取 Magisk_install...");
 
             InputStream magiskInst = getResources().openRawResource(R.raw.magisk_install);
             File magiskInstFile = new File(fileDir, "magisk_install");
@@ -143,14 +143,14 @@ public class MainActivity extends Activity {
         }
 
         private boolean executeNativeCode(String [] args) throws IOException, InterruptedException {
-            publishProgress("Executing native root binary...");
+            publishProgress("执行原生 Root 二进制文件...");
             Process nativeApp = Runtime.getRuntime().exec(args);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(nativeApp.getInputStream()));
 
             String str;
             while((str=reader.readLine())!=null) {
-                publishProgress("[NATIVE] " + str);
+                publishProgress("[本地] " + str);
             }
 
             reader.close();
@@ -166,14 +166,14 @@ public class MainActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             if (!result) {
-                addStatus("Root failed :(\n");
+                addStatus("Root 失败 :(\n");
 
                 rootButton.setText("Root");
                 rootButton.setClickable(true);
                 rootButton.getBackground().setColorFilter(null);
             } else {
-                addStatus("Enjoy your rooted device!");
-                rootButton.setText("Rooted");
+                addStatus("享受您已获得 Root 权限的设备吧！");
+                rootButton.setText("已获得 Root");
             }
         }
     }
