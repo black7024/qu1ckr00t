@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
             File pocDir = getApplicationContext().getFilesDir();
             File pocFile = new File(pocDir, "do_root");
             pocPath = pocFile.getPath();
-            publishProgress("从 APK 中提取原生代码...");
+            publishProgress("从 APK 中提取 poc 原生 root 代码...");
             copyFile(poc, pocFile.getPath());
             pocFile.setExecutable(true);
         }
@@ -150,7 +150,7 @@ public class MainActivity extends Activity {
 
             String str;
             while((str=reader.readLine())!=null) {
-                publishProgress("[本地] " + str);
+                publishProgress("[poc] " + str);
             }
 
             reader.close();
