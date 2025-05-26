@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.hernan.qu1ckr00t.MainActivity">
 
-
     <TextView
         android:text="Test"
         android:textSize="7pt"
@@ -45,7 +44,7 @@
         android:id="@+id/scrollView2">
 
         <TextView
-            android:text=""
+            android:text="• 使用CVE-2019-2215实现内核任意读写权限的漏洞验证程序 (PoC)&#10;• 参考: https://bugs.chromium.org/p/project-zero/issues/detail?id=1942&#10;• 此问题已于 2017 年 12 月在 4.14 LTS 内核、AOSP Android 3.18 内核、AOSP Android 4.4 内核 和 AOSP Android 4.9 内核中修补&#10;• 注意：当应用程序请求超级用户访问时，由于缺少通知，请求会超时。&#10;• 请使用ADB手动触发权限对话框：&#10;• am start -n APP_ID/a.m --user 0 -f 0x18000020 -a request --es socket SOCKET_ID&#10;• APP_ID是Magisk Manager包名称&#10;• 在root shell中找到SOCKET_ID：&#10;• 使用命令：lsof | grep magisk | grep ' @'&#10;• 汉化项目地址：https://github.com/black7024/qu1ckr00t&#10;&#10;"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
@@ -57,7 +56,6 @@
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:gravity="bottom"
             android:textIsSelectable="true"/>
-
     </ScrollView>
 
     <Button style="@style/Widget.AppCompat.Button.Colored"
